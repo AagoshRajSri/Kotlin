@@ -1,5 +1,10 @@
 #!/usr/bin/env kotlin
 
+
+
+import javax.management.monitor.StringMonitor
+import kotlin.text.Typography.section
+
 // import com.sun.jdi.IntegerType
 
 //fun main(){
@@ -265,23 +270,837 @@
 //}
 
 // how we can make re-usable functions
-fun main(){
-    println("Enter a text")
-    val input = readln()
-    val reversed = reversed(input)
-    println(reversed)
-    if(input == reversed(input)){
-        println("that is a palindrome!")
-    }else {
-        println("that is not a palindrome!")
+//fun main(){
+//    println("Enter a text")
+//    val input = readln()
+//    val reversed = reversed(input)
+//    println(reversed)
+//    if(input == reversed(input)){
+//        println("that is a palindrome!")
+//    }else {
+//        println("that is not a palindrome!")
+//    }
+//}
+//
+//fun reversed(stringToReverse: String): String{
+//    val finalString = buildString{
+//        for(i in stringToReverse.lastIndex downTo 0){
+//            append(stringToReverse[i])
+//        }
+//    }
+//    return finalString
+//}
+
+//fun main(){
+//    // extension function
+//    val text = "Oggy"
+//    println(text.addStars())
+//}
+//fun String.addStars() : String {
+//    return buildString {
+//        append("*** ")
+//        append(this@addStars)
+//        append(" ***")
+//    }
+//}
+
+//fun main() {
+//    // extension fn
+//    println("Enter a String")
+//    val input = readln()
+//
+//    println(input.reversedCustom())
+//}
+//
+//fun String.reversedCustom(): String {
+//    return buildString {
+//        for (i in this@reversedCustom.lastIndex downTo 0) {
+//            append(this@reversedCustom[i])
+//        }
+//    }
+//}
+
+//fun main() {
+// FUNCTION OVERLOADING
+//    println(add(2, 3))         // Int version
+//
+//    println(add(2.5, 3.5))     // Double version
+//}
+//
+//fun add(a: Int, b: Int): Int {
+//    return a + b
+//}
+//
+//fun add(a: Double, b: Double): Double {
+//    return a + b
+//}
+
+//fun main(){
+//    println(call("mom"))
+//    println(call("dad", 5))
+//}
+//
+//fun call(str : String) :String{
+//    return "calling $str"
+//}
+//
+//fun call(str : String, int : Int) : String{
+//    return "called $str, $int times"
+//}
+
+// data class
+//data class Student(
+//    val name: String,
+//    val age: Int
+//)
+//fun main(){
+//    val student = Student("Oggy", 20);
+//    println(student)
+//    println("Hello, ${student.name}")
+//}
+
+// class and objects
+//class Dog {
+//    var name = "Unknown";
+//}
+//fun main(){
+//    val dog1 = Dog();
+//    dog1.name = "Bruno";
+//    println(dog1.name)
+//    val dog2 = Dog();
+//    dog2.name = "Tommy";
+//    println(dog2.name)
+//}
+
+// properties (GETTER AND SETTER)
+//class Speaker {
+//
+//    var volume = 50
+//        set(value) {
+//            field = value.coerceIn(0, 100)
+//        }
+//
+//    fun showVolume() {
+//        println("Current Volume: $volume")
+//    }
+//}
+//
+//fun main() {
+//
+//    val speaker = Speaker()
+//
+//    speaker.volume = 80
+//    speaker.showVolume()
+//
+//    speaker.volume = 200
+//    speaker.showVolume()
+//
+//    speaker.volume = -20
+//    speaker.showVolume()
+//}
+
+//INHERITANCE
+//open class Animal(
+//    val name: String
+//) {
+//    open fun speak() {
+//        println("$name is making a sound.")
+//    }
+//}
+//
+//class Dog(name: String) : Animal(name) {
+//    override fun speak() {
+//        println("$name is barking.")
+//    }
+//}
+//
+//fun main() {
+//    val dog = Dog("Tommy")
+//    dog.speak()
+//}
+
+
+
+// ABSTRACT CLASS
+//abstract class Animal(
+//    val name: String
+//) {
+//    abstract fun speak()
+//
+//    fun sleep() {
+//        println("$name is sleeping")
+//    }
+//}
+//
+//class Dog(name: String) : Animal(name) {
+//    override fun speak() {
+//        println("$name says: Woof!")
+//    }
+//}
+//
+//class Cat(name: String) : Animal(name) {
+//    override fun speak() {
+//        println("$name says: Meow!")
+//    }
+//}
+//
+//fun main() {
+//    val dog = Dog("Lobo")
+//    val cat = Cat("Keo")
+//
+//    dog.speak()
+//    cat.speak()
+//
+//    dog.sleep()
+//    cat.sleep()
+//}
+
+// POLYMORPHISM
+//abstract class Notification {
+//
+//    abstract fun send()
+//}
+//
+//class EmailNotification : Notification() {
+//
+//    override fun send() {
+//        println("Sending Email")
+//    }
+//}
+//
+//class SMSNotification : Notification() {
+//
+//    override fun send() {
+//        println("Sending SMS")
+//    }
+//}
+//
+//fun main() {
+//
+//    val notifications: List<Notification> = listOf(
+//        EmailNotification(),
+//        SMSNotification(),
+//        EmailNotification()
+//    )
+//
+//    for (notif in notifications) {
+//        notif.send()
+//    }
+//}
+
+// object, companion, factory method
+// A Singleton means:
+// There will only ever be one instance of this class.
+// the keyword "object" creates a singleton
+
+// singleton
+//object Database {
+//    fun connect() = println("Connecting...")
+//}
+//class User private constructor(val nickname: String) {
+//    // companion object
+//    companion object {
+//        // factory method
+//        fun createGuest(): User {
+//            return User(nickname = "Guest");
+//        }
+//    }
+//}
+//fun main(){
+//    Database.connect()
+//    val user = User.createGuest()
+//    println(user.nickname)
+//}
+
+// Enum - An enum is a fixed list of predefined values.
+//enum class AssistantState {
+//    IDLE,
+//    LISTENING,
+//    THINKING,
+//    SPEAKING,
+//    ERROR
+//}
+//
+//fun updateState(state: AssistantState) {
+//    // Prints the enum value
+//    println("Current State: $state")
+//
+//    when (state) {
+//        AssistantState.IDLE -> println("Assistant is idle.")
+//        AssistantState.LISTENING -> println("Assistant is listening...")
+//        AssistantState.THINKING -> println("Assistant is thinking...")
+//        AssistantState.SPEAKING -> println("Assistant is speaking...")
+//        AssistantState.ERROR -> println("An error occurred.")
+//    }
+//
+//    println()
+//}
+//
+//fun main() {
+//    updateState(AssistantState.IDLE)
+//    updateState(AssistantState.LISTENING)
+//    updateState(AssistantState.THINKING)
+//    updateState(AssistantState.SPEAKING)
+//    updateState(AssistantState.ERROR)
+//}
+
+// sealed classes
+// A sealed class is like an enum whose states can carry different kinds of data.
+//sealed class Result {
+//    object Loading : Result()
+//
+//    data class Success(val result: String) : Result()
+//    data class Error(val error: String) : Result()
+//
+//fun fetchUser(success: Boolean) : Result {
+//    println("Fetching user...")
+//    return if (success) {
+//        Result.Success("Operation was a success!")
+//    } else {
+//        Result.Error("Unable to fetch user")
+//    }
+//}
+//}
+//fun main(){
+//    val result = fetchUser(true)
+//    when (result) {
+//        is Result.Loading -> println("Loading...")
+//        is Result.Success -> println("Successfully fetched user.")
+//        is Result.Error -> println("Error fetching user.")
+//    }
+//}
+
+//sealed class AIMODEL {
+//    object thinking: AIMODEL()
+//    data class listening(val listen: String) : AIMODEL()
+//    data class responding(val response: String) : AIMODEL()
+//}
+//fun fetchModel(step: Int): AIMODEL {
+//    return when (step) {
+//        1 -> AIMODEL.thinking
+//        2 -> AIMODEL.listening("AI is listening to the USER")
+//        3 -> AIMODEL.responding("AI is responding to the USER")
+//        else -> AIMODEL.responding("INVALID STEP")
+//    }
+//}
+//fun displayModel(model: AIMODEL){
+//    when (model) {
+//        is AIMODEL.thinking -> println("Thinking about what the USER said..")
+//        is AIMODEL.listening -> println(model.listen)
+//        is AIMODEL.responding -> println(model.response)
+//    }
+//}
+//
+//fun main(){
+//    for(step in 1..3){
+//        val model = fetchModel(step)
+//        displayModel(model)
+//        println("_____________________________")
+//    }
+//}
+
+// COLLECTIONS - Think of collections as different types of containers.
+// map() transforms every element into something else.
+// 1 ----
+// fun main() {
+//    // Create a list of numbers
+//    val numbers = listOf(1, 2, 3)
+//
+//    // Double each number using map
+//    val doubled = numbers.map { it * 2 }
+//
+//    // Print the original list
+//    println("Original list: $numbers")
+//
+//    // Print the doubled list
+//    println("Doubled list: $doubled")
+//}
+// 2 ----
+//fun main() {
+//    val names = listOf(
+//        "oggy",
+//        "doggy",
+//        "jack"
+//    )
+//    val upper = names.map { it.uppercase() }
+//    println(upper)
+//}
+// filter() - Keeps only items that satisfy a condition.
+// 1 ------
+//fun main(){
+//    val numbers = listOf(1,2,3,4,5)
+//    val even = numbers.filter { it % 2 == 0 }
+//    println(even)
+//}
+// 2 ------
+//fun main(){
+//    val name = listOf(
+//        "John",
+//        "Peter",
+//        "Marry",
+//    )
+//    val longNames = name.filter { it.length > 4 }
+//    println(longNames)
+//}
+// find() -
+//fun main() {
+//    val numbers = listOf(1,2,3,4,5)
+//    val result = numbers.find { it == 3 }
+//    println(result)
+//}
+// first() -
+//fun main() {
+//    val numbers = listOf(1, 2, 3, 4, 5)
+//    val result = numbers.first { it > 4 }
+//    println(result)
+//}
+//find() - Returns: null if nothing found, first() - Throws an exception if nothing matches.
+
+// any()
+//fun main(){
+//    val numbers = listOf(1,2,3,4,5)
+//    val answer = numbers.any{
+//        it == 4
+//    }
+//    println(answer)
+//}
+
+// all()
+//fun main(){
+//    val numbers = listOf(2,4,6)
+//    val result = numbers.all {
+//        it % 2 == 0
+//    }
+//    println(result)
+//}
+
+// sorted()
+//data class Person(
+//    val name: String,
+//    val age: Int
+//)
+//fun main() {
+//    val users = listOf(
+//        Person("Oggy", 20),
+//        Person("Dooggy", 53),
+//        Person("LOLOLOL", 44)
+//    )
+//    val sorted = users.sortedBy { it.age }
+//    println(sorted)
+//}
+
+// groupBy()
+//data class Student (
+//    val name: String,
+//    val grade: String
+//)
+//fun main(){
+//    val students = listOf(
+//        Student("Rony", "B"),
+//        Student("Pony", "C"),
+//        Student("Dony", "A")
+//    )
+//    val grouped = students.groupBy { it.grade }
+//    println(grouped)
+//}
+
+// associateBy() -converts a list into a Map, where you choose what becomes the key.
+//data class User(
+//    val id: Int,
+//    val name: String
+//)
+//fun main(){
+//    val users = listOf(
+//        User(1,"Raj"),
+//        User(2,"Oggy")
+//    )
+//    val map = users.associateBy {
+//        it.id
+//    }
+//    println(map)
+//}
+
+// Higher Order Function (HOF) - A function that either:
+//takes another function as a parameter, OR
+//returns another function.
+// 1
+//fun perform(
+//    action: () -> Unit
+//) {
+//    action()
+//}
+//fun main() {
+//    perform {
+//        println("Hello from lambda!")
+//    }
+//}
+// 2
+//fun operate(
+//    a: Int,
+//    b: Int,
+//    operation: (Int, Int) -> Int
+//) = operation(a, b)
+//
+//fun main() {
+//    val add = operate(5, 3) { x, y ->
+//        x + y
+//    }
+//    val multiply = operate(5, 3) { x, y ->
+//        x * y
+//    }
+//    println(add)
+//    println(multiply)
+//}
+
+// scope objects
+// let - Do something with an object
+// let is commonly used when you want to perform an operation on an object, especially when it might be null.
+// example -
+//val name = "John"
+//
+//name.let {
+//    println(it.length)
+//    println(it.uppercase())
+// }
+
+// run - Run some code using this object
+// run is useful when you want to use an object's properties and methods without repeatedly writing the object name
+// example -
+//val person = Person()
+//
+//person.run {
+//    name = "John"
+//    age = 25
+//    introduce()
+//}
+//Inside the block, you can directly write:
+//
+//name
+//age
+//introduce()
+//
+//instead of:
+//
+//person.name
+//person.age
+//person.introduce()
+
+// with - Work with this object
+// with is similar to run.
+//The main difference is the syntax.
+// val person = Person()
+//with(person) {
+//    name = "John"
+//    age = 25
+//    introduce()
+//}
+
+// apply - Configure this object
+// Use apply when you create an object and want to set up its properties.
+// do this
+//val person = Person().apply {
+//    name = "John"
+//    age = 25
+//}
+// instead of
+//val person = Person()
+//
+//person.name = "John"
+//person.age = 25
+
+// also - also do this
+// also is useful when you want to perform an additional action without changing the object.
+//val numbers = mutableListOf(1, 2, 3)
+//    .also {
+//        println("Before adding: $it")
+//    }
+//
+//numbers.add(4)
+
+// combined example
+//fun main(){
+//    // apply
+//    val emp = Employee()
+//    emp.apply {
+//        id = 1
+//        name = "Aagosh"
+//    }
+//    println(emp.id)
+//    println(emp.name)
+//
+//    // let
+//    val emp1: Employee = Employee()
+//    emp1?.let {
+//        println(it.id)
+//        println(it.name)
+//    }
+//
+//    // with
+//    with(emp){
+//        println(name)
+//    }
+//
+//    // run
+//    emp.run {
+//        val x = name.uppercase()
+//        println(x)
+//    }
+//
+//    // also
+//    emp.also {
+//        println("The name is ${it.name}")
+//    }
+//}
+//class Employee{
+//    var id: Int = 0
+//    var name: String = ""
+//}
+
+//  combined example II
+//data class Employee(
+//    var id: Int = 0,
+//    var name: String = "",
+//    var department: String = "",
+//    var salary: Double = 0.0
+//)
+//
+//fun getEmployeeFromServer(): Employee? {
+//
+//    // Pretend this came from an API
+//    return Employee(
+//        id = 101,
+//        name = "Aagosh",
+//        department = "Engineering",
+//        salary = 80000.0
+//    )
+//}
+//
+//fun main() {
+//
+//    getEmployeeFromServer()
+//        ?.let { employee ->
+//
+//            // We have a valid employee
+//            employee.also {
+//                println("Employee received: ${it.name}")
+//            }
+//
+//            // Calculate something
+//            val summary = employee.run {
+//                val monthlySalary = salary / 12
+//
+//                "$name works in $department " +
+//                        "and earns $monthlySalary per month"
+//            }
+//
+//            println(summary)
+//
+//            // Generate report
+//            with(employee) {
+//                println("----- EMPLOYEE -----")
+//                println("ID: $id")
+//                println("Name: $name")
+//                println("Department: $department")
+//            }
+//        }
+//}
+
+//  combined example III
+//data class Student(
+//    var name: String = "",
+//    var rno: Int = 0,
+//    var section: String = "",
+//    var grade: String = ""
+//)
+//
+//fun getStudent(): Student? {
+//
+//    return Student(
+//        name = "Oggy",
+//        rno = 1,
+//        section = "E",
+//        grade = "A"
+//    )
+//}
+//
+//fun main() {
+//
+//    // --------------------------------
+//    // LET
+//    // --------------------------------
+//
+//    val student = getStudent()?.let { student ->
+//
+//        println("Student found: ${student.name}")
+//
+//        // --------------------------------
+//        // ALSO
+//        // --------------------------------
+//
+//        student.also {
+//            println("New student joined: ${it.name}")
+//        }
+//    }
+//
+//
+//    // --------------------------------
+//    // RUN
+//    // --------------------------------
+//
+//    student?.run {
+//
+//        when (grade) {
+//            "A" -> println("Excellent grade!")
+//            "B" -> println("Good grade!")
+//            "C" -> println("Average grade")
+//            "D" -> println("Needs improvement")
+//            else -> println("Grade not available")
+//        }
+//
+//    }
+//
+//
+//    // --------------------------------
+//    // WITH
+//    // --------------------------------
+//
+//    student?.let {
+//
+//        with(it) {
+//
+//            println("------ STUDENT ------")
+//            println("Name: $name")
+//            println("Roll Number: $rno")
+//            println("Section: $section")
+//            println("Grade: $grade")
+//        }
+//    }
+//
+//
+//    // --------------------------------
+//    // APPLY
+//    // --------------------------------
+//
+//    val newStudent = Student().apply {
+//
+//        name = "Tom"
+//        rno = 2
+//        section = "E"
+//        grade = "B"
+//    }
+//
+//    println("New student: ${newStudent.name}")
+//}
+
+////  combined example IV
+//data class AIRequest(
+//    var model: String = "",
+//    var prompt: String = "",
+//    var temperature: Double = 0.0
+//)
+//
+//fun main() {
+//    val request = AIRequest()
+//        .apply {
+//            model = "GPT"
+//            prompt = "Explain Kotlin"
+//            temperature = 0.7
+//        }
+//        .also {
+//            println("Request created")
+//        }
+//
+//    val promptLength = request.run {
+//        prompt.length
+//    }
+//
+//    println(promptLength)
+//
+//    val response: String? = "Kotlin is awesome"
+//
+//    response?.let {
+//        println("AI Response: $it")
+//    }
+//}
+
+//Advanced Null Safety
+// 1 - !! - Kotlin, I promise this is NOT null. Let me use it as a normal value.
+//val name: String? = null
+//println(name!!.length)
+// But there are situations involving complex code where you may know the value cannot be null even though Kotlin can't prove it.
+//That's when !! can sometimes be used.
+
+// 2 - lateinit - I promise I will initialize this variable later.
+//class MainActivity {
+//    lateinit var database: AppDatabase
+//    fun setup() {
+//        database = createDatabase()
+//    }
+//}
+
+// 3 - lazy - Don't create this value until I actually need it.
+//val database by lazy {
+//    createDatabase()
+//}
+
+//lateinit
+//Use when:
+//initialization genuinely happens later
+//you know it will be initialized before use
+//you need a var
+
+//lazy
+//Use when:
+//
+//initialization is expensive
+//initialization can be delayed
+//the value doesn't need to change
+
+// GENERIC - A Generic lets you write code that can work with different data types without rewriting the code.
+// Generics let you write code that works with different types safely, while sealed classes let you model a fixed set of possible outcomes/states.
+// 1
+//fun <T> printValue(value: T){
+//    println(value)
+//}
+//fun main(){
+//    printValue("Hello World!")
+//    printValue(45)
+//    printValue(true)
+//    printValue(3.45)
+//}
+
+// 2
+class ArrayUtil<T>(private val array: Array<T>){
+    fun findElement(element: T, foundElement: (index: Int, element: T?) -> Unit){
+        for(i in array.indices){
+            if(array[i] == element){
+                foundElement(i, array[i])
+                return
+            }
+        }
+        foundElement(-1, null)
+        return
+    }
+}
+fun main() {
+    val util = ArrayUtil(arrayOf(1, 2, 3, 4))
+
+    util.findElement(1) { index, element ->
+        println("Element $element at index $index")
     }
 }
 
-fun reversed(stringToReverse: String): String{
-    val finalString = buildString{
-        for(i in stringToReverse.lastIndex downTo 0){
-            append(stringToReverse[i])
-        }
-    }
-    return finalString
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
