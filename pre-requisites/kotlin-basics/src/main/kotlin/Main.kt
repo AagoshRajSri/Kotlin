@@ -1070,27 +1070,81 @@ import kotlin.text.Typography.section
 //}
 
 // 2
-class ArrayUtil<T>(private val array: Array<T>){
-    fun findElement(element: T, foundElement: (index: Int, element: T?) -> Unit){
-        for(i in array.indices){
-            if(array[i] == element){
-                foundElement(i, array[i])
-                return
-            }
-        }
-        foundElement(-1, null)
-        return
-    }
-}
+//class ArrayList<T>(private val array: Array<T>){
+//    fun findElement(
+//        element: T,
+//        foundElement: (index: Int, element: T?) -> Unit
+//    ) {
+//        for (i in array.indices) {
+//            if (array[i] == element) {
+//                foundElement(i, array[i])
+//                return
+//            }
+//        }
+//            foundElement(-1, null)
+//            return
+//    }
+//}
+//fun main(){
+//    val util = ArrayList(arrayOf(1, 2, 3, 4))
+//    util.findElement(2){
+//        index, element -> println("index - $index, element - $element")
+//    }
+//}
+
+// 3
 fun main() {
-    val util = ArrayUtil(arrayOf(1, 2, 3, 4))
+    val success: Result<AIResponse> =
+        Result.Success(
+            AIResponse("Hello Oggy!")
+        )
 
-    util.findElement(1) { index, element ->
-        println("Element $element at index $index")
-    }
+    val error: Result<AIResponse> =
+        Result.Error(
+            "Network timeout"
+        )
+
+    val transcript: Result<Transcript> =
+        Result.Success(
+            Transcript("Hey RAJ")
+        )
+
+    processResult(success)
+    processResult(error)
+    processResult(transcript)
 }
 
+sealed class Result<T> {
 
+    data class Success<T>(
+        val data: T
+    ) : Result<T>()
+
+    data class Error<T>(
+        val message: String
+    ) : Result<T>()
+}
+
+data class AIResponse(
+    val text: String
+)
+
+data class Transcript(
+    val text: String
+)
+
+fun <T> processResult(result: Result<T>) {
+
+    when (result) {
+        is Result.Success<T> -> {
+            println("Success: ${result.data}")
+        }
+        is Result.Error<T> -> {
+            println("Error: ${result.message}")
+        }
+    }
+
+}
 
 
 
